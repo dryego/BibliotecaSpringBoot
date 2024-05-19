@@ -29,11 +29,10 @@ public class Usuario {
     private List<EmprestimoLivro> emprestimosLivros; 
     
     public Usuario(){
-        
+
     }
 
-    public Usuario(Long id, String nome, String cpf) {
-        this.id = id;
+    public Usuario( String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
     }

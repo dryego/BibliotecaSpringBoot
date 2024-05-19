@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuario/busca")
 public class BuscaUsuarioController {
     @Autowired
     private BuscaUsuarioService usuarioService;
