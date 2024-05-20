@@ -21,15 +21,12 @@ public class CadastroEmprestimoControler {
     @PostMapping
     public ResponseEntity<Object> cadastroEmprestimo(@RequestBody EmprestimoRequest emprestimoRequest) {
         try {
-         Resposta<EmprestimoLivro> novoEmprestimo = cadastroemprestimoService.cadastroEmprestimo(
-            emprestimoRequest.getIdUsuario(),
-             emprestimoRequest.getIdLivro()
-            );
+         Resposta<EmprestimoLivro> novoEmprestimo = cadastroemprestimoService.cadastroEmprestimo(emprestimoRequest.getIdUsuario(), emprestimoRequest.getIdLivro());
          
          if(novoEmprestimo.getData() == null){
             return ResponseEntity.status(novoEmprestimo.getStatus()).body(novoEmprestimo.getMensagem());
          }
-         return ResponseEntity.status(novoEmprestimo.getStatus()).body(novoEmprestimo.getData());
+         return ResponseEntity.status(novoEmprestimo.getStatus()).body(novoEmprestimo.getMensagem());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro interno.");
         }
