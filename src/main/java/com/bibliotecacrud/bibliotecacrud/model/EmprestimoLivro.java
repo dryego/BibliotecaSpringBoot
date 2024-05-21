@@ -3,6 +3,8 @@ package com.bibliotecacrud.bibliotecacrud.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,10 +25,12 @@ public class EmprestimoLivro {
     private  Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "livro_id", nullable = false)
     private Livro livro;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
