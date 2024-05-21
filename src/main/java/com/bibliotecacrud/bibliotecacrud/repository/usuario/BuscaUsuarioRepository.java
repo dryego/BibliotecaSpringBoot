@@ -7,6 +7,5 @@ import com.bibliotecacrud.bibliotecacrud.model.Usuario;
 
 public interface BuscaUsuarioRepository extends JpaRepository<Usuario, Long> {
     
-    
 }
 
