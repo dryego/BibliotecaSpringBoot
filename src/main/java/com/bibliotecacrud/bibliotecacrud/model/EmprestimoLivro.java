@@ -21,7 +21,7 @@ import jakarta.persistence.TemporalType;
 @Table(name = "emprestimo_livro")
 public class EmprestimoLivro {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
