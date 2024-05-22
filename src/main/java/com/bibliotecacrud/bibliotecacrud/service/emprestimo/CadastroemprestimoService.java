@@ -34,9 +34,12 @@ public class CadastroemprestimoService {
         }
 
         Usuario usuario = usuarioExiste.get();
-        if(usuario.getEmprestimosLivros().size() >=3 ){
+        if(usuario.getEmprestimosLivros().stream().filter(e -> !e.isEntregaRealizada()).count() >= 3){
             return new Resposta<>(404, "O Usuario Nao pode realizar novos emprestimos.", null);
         }
+        // if(usuario.getEmprestimosLivros().size() >=3){
+        //     return new Resposta<>(404, "O Usuario Nao pode realizar novos emprestimos.", null);
+        // }
 
         Optional<Livro> livroExistent = livroRepository.findById(idLivro);
         if(livroExistent.isEmpty()){
@@ -44,7 +47,9 @@ public class CadastroemprestimoService {
         }
 
         Livro livro = livroExistent.get();
-        if(livro.getEmprestimosLivros().size() >= 1){
+        boolean livroDisponivel = livro.getEmprestimosLivros().stream().noneMatch(e -> e.isEntregaRealizada());
+        // if(livro.getEmprestimosLivros().size() >= 1){
+        if(!livroDisponivel){
             return new Resposta<>(404, "Livro não disponivel para emprestimo", null);
         }
 
