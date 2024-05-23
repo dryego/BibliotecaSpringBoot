@@ -21,7 +21,7 @@ import jakarta.persistence.TemporalType;
 @Table(name = "emprestimo_livro")
 public class EmprestimoLivro {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private  Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -79,7 +79,7 @@ public class EmprestimoLivro {
         this.dataEntrega = dataEntrega;
     }
 
-    public boolean isEntregaRealizada() {
+    public boolean getEntregaRealizada() {
         return entregaRealizada;
     }
 
