@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
     @Column(nullable = false)
