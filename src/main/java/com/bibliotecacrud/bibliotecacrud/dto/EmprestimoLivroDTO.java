@@ -1,15 +1,17 @@
 package com.bibliotecacrud.bibliotecacrud.dto;
 
-public class EmprestimoRequest {
+public class EmprestimoLivroDTO {
+    private Long id;
     private Long idUsuario;
     private Long idLivro;
-    private String titulo;
-    
-    public EmprestimoRequest(Long idUsuario, Long idLivro, String titulo) {
+        
+    public EmprestimoLivroDTO(Long id,Long idUsuario, Long idLivro) {
+        this.id = id;
         this.idUsuario = idUsuario;
         this.idLivro = idLivro;
-        this.titulo = titulo;
     }
+
+    public EmprestimoLivroDTO(){}
     
     public Long getIdUsuario() {
         return idUsuario;
@@ -23,12 +25,15 @@ public class EmprestimoRequest {
     public void setIdLivro(Long idLivro) {
         this.idLivro = idLivro;
     }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+
+    public Long getId() {
+        return id;
     }
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
+       
 }
+
+

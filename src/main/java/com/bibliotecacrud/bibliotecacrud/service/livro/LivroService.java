@@ -45,6 +45,6 @@ public class LivroService {
         Livro novoLivro = new Livro(id,titulo,anoPublicacao);
         livroRepository.save(novoLivro);
 
-        return new Resposta<>(404,"Livro ja cadastrado.", null);
+        return new Resposta<>(200,"Livro cadastrado Com sucesso.", null);
     }
 }

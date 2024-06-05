@@ -4,19 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.bibliotecacrud.bibliotecacrud.model.Usuario;
 import com.bibliotecacrud.bibliotecacrud.service.usuario.UsuarioService;
 import com.bibliotecacrud.bibliotecacrud.util.Resposta;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-
-@Controller
+@RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
     @Autowired

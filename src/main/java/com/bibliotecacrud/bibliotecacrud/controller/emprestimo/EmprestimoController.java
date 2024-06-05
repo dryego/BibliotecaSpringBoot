@@ -2,8 +2,8 @@ package com.bibliotecacrud.bibliotecacrud.controller.emprestimo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bibliotecacrud.bibliotecacrud.dto.EmprestimoRequest;
 import com.bibliotecacrud.bibliotecacrud.model.EmprestimoLivro;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/emprestimo")
 public class EmprestimoController {
     @Autowired

@@ -25,12 +25,12 @@ public class EmprestimoLivro {
     private  Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    // @JsonBackReference
     @JoinColumn(name = "livro_id", nullable = false)
     private Livro livro;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    // @JsonBackReference
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
