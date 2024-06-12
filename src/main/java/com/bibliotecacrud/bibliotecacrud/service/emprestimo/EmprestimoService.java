@@ -32,7 +32,9 @@ public class EmprestimoService {
         Optional<EmprestimoLivro> emprestimo = emprestimoRespository.findById(id);
 
         if(emprestimo.isPresent()){
-            return new Resposta<>(200, "Emprestimo localizado.", emprestimo.get());
+            EmprestimoLivro emprestimoLivro = emprestimo.get();
+
+            return new Resposta<>(200, "Emprestimo localizado.", emprestimoLivro);
         }else{
             return new Resposta<>(404,"emprestimo não encontrado." , null);
         }
@@ -42,6 +44,7 @@ public class EmprestimoService {
         List<EmprestimoLivro> emprestimos = emprestimoRespository.findAll();
 
         if(!emprestimos.isEmpty()){
+
             return new Resposta<>(200,"Emprestimos Localizado.",emprestimos.stream().toList());
         }else{
             return new Resposta<>(404, "Emprestimos não encontrado.", null);

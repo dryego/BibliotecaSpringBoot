@@ -1,14 +1,14 @@
 package com.bibliotecacrud.bibliotecacrud.dto;
 
-public class LivroDTO {
+public class LivroRequest {
     private Long id;
     private String titulo;
+    private int anoPublicacao;
 
-    public LivroDTO(){}
-
-    public LivroDTO(Long id, String titulo) {
+    public LivroRequest(Long id, String titulo, int anoPublicacao) {
         this.id = id;
         this.titulo = titulo;
+        this.anoPublicacao = anoPublicacao;
     }
 
     public Long getId() {
@@ -26,5 +26,12 @@ public class LivroDTO {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-       
+
+    public int getAnoPublicacao() {
+        return anoPublicacao;
+    }
+
+    public void setAnoPublicacao(int anoPublicacao) {
+        this.anoPublicacao = anoPublicacao;
+    }
 }

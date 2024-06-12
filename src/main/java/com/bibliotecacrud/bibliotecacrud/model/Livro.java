@@ -4,18 +4,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "livro")
+@NamedEntityGraph(name = "Livro.emprestimos", attributeNodes = @NamedAttributeNode("emprestimosLivros"))
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,8 +20,8 @@ public class Livro {
     @Column(name="ano_publicacao", nullable = false)
     private int anoPublicacao;
 
-    @OneToMany(mappedBy = "livro",cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
-    // @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<EmprestimoLivro> emprestimosLivros;
 
     

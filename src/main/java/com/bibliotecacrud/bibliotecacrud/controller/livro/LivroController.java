@@ -1,5 +1,6 @@
 package com.bibliotecacrud.bibliotecacrud.controller.livro;
 
+import com.bibliotecacrud.bibliotecacrud.dto.LivroRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,9 +60,9 @@ public class LivroController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<Object> postCadastroLivro(@RequestBody Livro livro) {
+    public ResponseEntity<Object> postCadastroLivro(@RequestBody LivroRequest livroRequest) {
         try {
-        Resposta<Livro> novoLivro = livroService.cadastraLivro(livro.getId(), livro.getTitulo(), livro.getAnoPublicacao());
+        Resposta<Livro> novoLivro = livroService.cadastraLivro(livroRequest.getId(), livroRequest.getTitulo(), livroRequest .getAnoPublicacao());
 
         if (novoLivro.getData() == null) {
             return ResponseEntity.status(novoLivro.getStatus()).body(novoLivro.getMensagem());

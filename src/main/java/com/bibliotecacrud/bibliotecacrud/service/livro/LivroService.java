@@ -1,5 +1,6 @@
 package com.bibliotecacrud.bibliotecacrud.service.livro;
 
+import com.bibliotecacrud.bibliotecacrud.model.EmprestimoLivro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

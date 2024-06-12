@@ -2,6 +2,7 @@ package com.bibliotecacrud.bibliotecacrud.controller.Usuario;
 
 import java.util.List;
 
+import com.bibliotecacrud.bibliotecacrud.dto.UsuarioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,10 +44,10 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/cadastro")
-    public ResponseEntity<Object> postCadastroUsuario(@RequestBody Usuario usuario) {
+    @PostMapping(value = "/cadastro", consumes = {"application/json", "application/xml"})
+    public ResponseEntity<Object> postCadastroUsuario(@RequestBody UsuarioRequest usuarioRequest) {
         try {
-            Resposta<Usuario> novoUsuario = usuarioService.cadastoUsuario(usuario.getNome(), usuario.getCpf());
+            Resposta<Usuario> novoUsuario = usuarioService.cadastoUsuario(usuarioRequest.getNome(), usuarioRequest.getCpf());
 
             if(novoUsuario.getData() == null){
                 return ResponseEntity.status(novoUsuario.getStatus()).body(novoUsuario.getMensagem());

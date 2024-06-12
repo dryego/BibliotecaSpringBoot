@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,12 +26,14 @@ public class EmprestimoLivro {
     private  Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    // @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "livro_id", nullable = false)
     private Livro livro;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    // @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
