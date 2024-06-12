@@ -1,5 +1,6 @@
 package com.bibliotecacrud.bibliotecacrud.service.emprestimo;
 
+import com.bibliotecacrud.bibliotecacrud.dto.EmprestimoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +29,20 @@ public class EmprestimoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Resposta<EmprestimoLivro> buscaEmprestimoLivro(Long id){
+    public Resposta<EmprestimoDTO> buscaEmprestimoLivro(Long id){
         Optional<EmprestimoLivro> emprestimo = emprestimoRespository.findById(id);
 
         if(emprestimo.isPresent()){
             EmprestimoLivro emprestimoLivro = emprestimo.get();
+            EmprestimoDTO emprestimoDTO =new EmprestimoDTO(
+                    emprestimoLivro.getId(),
+                    emprestimoLivro.getEntregaRealizada(),
+                    emprestimoLivro.getDataEntrega(),
+                    emprestimoLivro.getUsuario().getId(),
+                    emprestimoLivro.getLivro().getId()
+            );
 
-            return new Resposta<>(200, "Emprestimo localizado.", emprestimoLivro);
+            return new Resposta<>(200, "Emprestimo localizado.", emprestimoDTO);
         }else{
             return new Resposta<>(404,"emprestimo não encontrado." , null);
         }
@@ -51,7 +59,7 @@ public class EmprestimoService {
         }
     }
 
-    public Resposta<EmprestimoLivro> cadastroEmprestimo(Long idUsuario, Long idLivro){
+    public Resposta<EmprestimoDTO> cadastroEmprestimo(Long idUsuario, Long idLivro){
         Optional<Usuario> usuarioExiste = usuarioRepository.findById(idUsuario);
         
         if(usuarioExiste.isEmpty()){
@@ -85,21 +93,32 @@ public class EmprestimoService {
         novoEmprestimo.setEntregaRealizada(entrega);
 
         emprestimoRespository.save(novoEmprestimo);
-        return new Resposta<>(200, "Emprestimo cadastrado com sucesso.", novoEmprestimo);
+
+        EmprestimoDTO emprestimoDTO = new EmprestimoDTO(
+                novoEmprestimo.getId(),
+                novoEmprestimo.getEntregaRealizada(),
+                novoEmprestimo.getDataEntrega(),
+                usuario.getId(),
+                livro.getId()
+
+                );
+        return new Resposta<>(200, "Emprestimo cadastrado com sucesso.", emprestimoDTO);
     }
 
     public Resposta<EmprestimoLivro> devolverLivro(Long idEmprestimo){
         Optional<EmprestimoLivro> emprestimoExiste = emprestimoRespository.findById(idEmprestimo);
 
         if(emprestimoExiste.isPresent()){
-            EmprestimoLivro emprestimo = emprestimoExiste.get();
-            emprestimo.setEntregaRealizada(true);
+            if(emprestimoExiste.get().getEntregaRealizada() != true){
+                EmprestimoLivro emprestimo = emprestimoExiste.get();
+                emprestimo.setEntregaRealizada(true);
 
-            emprestimoRespository.save(emprestimo);
-            return new Resposta<>(200, "Livro devolvido com sucesso.", emprestimo);
+                emprestimoRespository.save(emprestimo);
+                return new Resposta<>(200, "Livro devolvido com sucesso.", emprestimo);
+            }
+            return new Resposta<>(200, "Livro já devolvido.", null);
         }else{
             return new Resposta<>(404, "Emprestimo Não encontrado.", null);
         }
-        
     }
 }

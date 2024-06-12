@@ -1,5 +1,6 @@
 package com.bibliotecacrud.bibliotecacrud.controller.emprestimo;
 
+import com.bibliotecacrud.bibliotecacrud.dto.EmprestimoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class EmprestimoController {
     public ResponseEntity<Object> getBuscaEmprestimo(@PathVariable Long id) {
         try {
             
-        Resposta<EmprestimoLivro> emprestimo = emprestimoService.buscaEmprestimoLivro(id);
+        Resposta<EmprestimoDTO> emprestimo = emprestimoService.buscaEmprestimoLivro(id);
 
         if(emprestimo.getData() == null){
             return ResponseEntity.status(emprestimo.getStatus()).body(emprestimo.getMensagem());
@@ -59,7 +60,7 @@ public class EmprestimoController {
     @PostMapping("/cadastro")
     public ResponseEntity<Object> cadastroEmprestimo(@RequestBody EmprestimoRequest emprestimoRequest) {
         try {
-         Resposta<EmprestimoLivro> novoEmprestimo = emprestimoService.cadastroEmprestimo(emprestimoRequest.getIdUsuario(), emprestimoRequest.getIdLivro());
+         Resposta<EmprestimoDTO> novoEmprestimo = emprestimoService.cadastroEmprestimo(emprestimoRequest.getIdUsuario(), emprestimoRequest.getIdLivro());
          
          if(novoEmprestimo.getData() == null){
             return ResponseEntity.status(novoEmprestimo.getStatus()).body(novoEmprestimo.getMensagem());
